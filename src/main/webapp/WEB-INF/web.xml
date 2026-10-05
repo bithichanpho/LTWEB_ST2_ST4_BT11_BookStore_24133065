@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0" metadata-complete="true">
+
+    <display-name>BookStoreGK24133065 - BookStore</display-name>
+
+    <!-- SiteMesh -->
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!-- Admin authorization -->
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>filter.AdminFilter_24133065</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <!-- Cart count -->
+    <filter>
+        <filter-name>CartCountFilter</filter-name>
+        <filter-class>filter.CartCountFilter_24133065</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CartCountFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!--
+      IMPORTANT:
+      metadata-complete=true disables annotation scanning intentionally.
+      All current servlets are declared explicitly below so a stale
+      AdminBookController.class left in Eclipse/WTP/Tomcat cannot create
+      a duplicate /admin/books mapping.
+    -->
+
+    <servlet>
+        <servlet-name>AdminBookController</servlet-name>
+        <servlet-class>controller.AdminBookController_24133065</servlet-class>
+        <multipart-config>
+            <max-file-size>5242880</max-file-size>
+            <max-request-size>10485760</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping><servlet-name>AdminBookController</servlet-name><url-pattern>/admin/books</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>AdminBookController</servlet-name><url-pattern>/admin/book/add</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>AdminBookController</servlet-name><url-pattern>/admin/book/edit</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>AdminBookController</servlet-name><url-pattern>/admin/book/delete</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminOrderController</servlet-name>
+        <servlet-class>controller.AdminOrderController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>AdminOrderController</servlet-name><url-pattern>/admin/orders</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>AdminOrderController</servlet-name><url-pattern>/admin/order/detail</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>AdminOrderController</servlet-name><url-pattern>/admin/order/update-status</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookDetailController</servlet-name>
+        <servlet-class>controller.BookDetailController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>BookDetailController</servlet-name><url-pattern>/book/detail</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>controller.CartController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>CartController</servlet-name><url-pattern>/cart</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>CartController</servlet-name><url-pattern>/cart/add</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>CartController</servlet-name><url-pattern>/cart/update</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>CartController</servlet-name><url-pattern>/cart/remove</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>controller.HomeController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>HomeController</servlet-name><url-pattern>/home</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>HomeController</servlet-name><url-pattern>/books</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>ImageController</servlet-name>
+        <servlet-class>controller.ImageController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>ImageController</servlet-name><url-pattern>/book-image</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>LoginController</servlet-name><url-pattern>/login</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.LogoutController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>LogoutController</servlet-name><url-pattern>/logout</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>controller.OrderController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>OrderController</servlet-name><url-pattern>/checkout</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>OrderController</servlet-name><url-pattern>/order/place</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>OrderController</servlet-name><url-pattern>/order/history</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>OrderController</servlet-name><url-pattern>/order/detail</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>controller.RegisterController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>RegisterController</servlet-name><url-pattern>/register</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReviewController</servlet-name>
+        <servlet-class>controller.ReviewController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>ReviewController</servlet-name><url-pattern>/book/review</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>VerifyOtpController</servlet-name>
+        <servlet-class>controller.VerifyOtpController_24133065</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>VerifyOtpController</servlet-name><url-pattern>/verify</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>VerifyOtpController</servlet-name><url-pattern>/resend-otp</url-pattern></servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

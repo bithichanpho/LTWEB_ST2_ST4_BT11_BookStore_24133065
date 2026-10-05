@@ -1,0 +1,12 @@
+<sitemesh>
+    <!-- SiteMesh resolves decorator names relative to WEB-INF/decorators -->
+    <mapping path="/*" decorator="/main.jsp" />
+    <mapping path="/admin/*" decorator="/admin.jsp" />
+
+    <!-- Static resources -->
+    <mapping path="/image/*" exclude="true" />
+    <mapping path="/book-image" exclude="true" />
+    <mapping path="/assets/*" exclude="true" />
+    <mapping path="/css/*" exclude="true" />
+    <mapping path="/js/*" exclude="true" />
+</sitemesh>
